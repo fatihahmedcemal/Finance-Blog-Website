@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@200;300;400&display=swap" rel="stylesheet">
+    <!-- css -->
+    <link rel="stylesheet" href="css/discover.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/dashboard-navbar.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+
+    <%- include("navbar.ejs"); %>
+
+    <%- include("dashboard-navbar.ejs"); %>
+
+  <div class="trending-sub-categories">
+    <h3>Most Popular Sub Categories:</h3>
+    <div class="sub-categories">
+      <!-- sub categories 1 -->
+      <div class="sub-categories1">
+        <a href="/dashboard/sub-categories?subCategory=<%= popularSubCategories[0] %>" class="sub-category"><%= popularSubCategories[0] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[1] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[2] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[3] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[4] %></a>
+      </div>
+      <!-- sub categories 2 -->
+      <div class="sub-categories2">
+        <a href="#" class="sub-category"><%= popularSubCategories[5] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[6] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[7] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[8] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[9] %></a>
+      </div>
+      <!-- sub categories 3 -->
+      <div class="sub-categories3">
+        <a href="#" class="sub-category"><%= popularSubCategories[10] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[11] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[12] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[13] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[14] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[15] %></a>
+      </div>
+      <!-- sub categories 4 -->
+      <div class="sub-categories4">
+        <a href="#" class="sub-category"><%= popularSubCategories[16] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[17] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[18] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[19] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[20] %></a>
+        <a href="#" class="sub-category"><%= popularSubCategories[21] %></a>
+      </div>
+    </div>
+  </div>
+
+  <%- include("./footer/footer.ejs"); %>
+
+  <script src="/js/Search.js"></script>
+  <script src="/js/dashboardNavbar"></script>
+</body>
+</html>

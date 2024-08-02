@@ -1,0 +1,116 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+/* results */
+.results {
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 50px;
+}
+.category-results, .sub-category-results, .people-results {
+    margin-bottom: 35px;
+    margin-left: 20px;
+}
+
+.category-results a {
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+    color: black;
+    background-color: #c1eaf7;
+    padding: 15px 30px;
+    width: 8%;
+    text-align: center;
+    border-radius: 100px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.category-results h2 {
+    font-size: 35px;
+}
+
+.sub-category-results a {
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+    color: white;
+    background-color: #279596;
+    padding: 15px 30px;
+    width: 10%;
+    text-align: center;
+    border-radius: 12px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.sub-category-results h2 {
+    font-size: 35px;
+}
+/* people results */
+.people-results a {
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+    color: white;
+    background-color: #279596;
+    padding: 15px 30px;
+    width: 10%;
+    text-align: center;
+    border-radius: 12px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.people-results h2 {
+    font-size: 35px;
+}
+
+.helper-profile {
+    width: 200px;
+    padding: 30px;
+    background: linear-gradient(to bottom right, rgba(240, 245, 245, 0.6), rgba(199, 211, 212, 0.2));
+
+    margin-right: 50px;
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+.helper-profile img {
+    width: 200px;
+    border-radius: 10px;
+}
+
+.helper-profile h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 30px;
+}
+
+.helper-profile a {
+    display: block;
+    margin-top: 25px;
+    text-decoration: none;
+    color: white;
+    background-color: #115b5c;
+    padding: 15px 15px;
+    border-radius: 10px;
+    width: 100px;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .results {
+        grid-template-columns: 1fr 1fr 1fr; 
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .results {
+        grid-template-columns: 1fr 1fr; 
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .results {
+        grid-template-columns: 1fr; 
+    }
+}

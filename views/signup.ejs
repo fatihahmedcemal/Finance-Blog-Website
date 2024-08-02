@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/footer/footer.css">
+    <link rel="stylesheet" href="css/login-signup.css">
+    <link rel="stylesheet" href="css/navbar.css">
+</head>
+<body>
+  <%- include("navbar.ejs"); %>
+
+  <div class="menu">
+    <div class="body">
+      <a href="/" class="logo">Appointment Website</a>
+    </div>
+    <div class="form">
+      <form action="/auth/signup" method="post">
+        <h3> Sign Up </h3>
+        <div class="username">
+            
+          <label for="Username">Username:</label>
+          <input autocomplete="off" type="text" name="username" id="">
+            
+        <div>
+          
+        <div class="email">
+          <label for="Email">Email:</label>
+          
+          <input autocomplete="off" type="email" name="email" id="">
+            
+        </div>
+          
+        <div class="password">
+            
+          <label for="password">Password:</label>
+          <input autocomplete="off" type="password" name="password" id="">
+            
+        </div>
+
+        <div class="helper-or-customer">
+          <select id="role" name="role">
+            <option value="Customer">Customer</option>
+            <option value="Helper">Helper</option>
+          </select>
+        </div>
+          
+        <button id="button">Submit</button>
+
+        <div>
+          <a href="/auth/login" class="signup-link">Already A User? Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- include("./footer/footer.ejs"); %>
+</body>
+</html>

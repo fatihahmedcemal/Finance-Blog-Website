@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Page</title>
+
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/adminNavbar.css">
+    <link rel="stylesheet" href="css/account.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <%- include("navbar.ejs"); %>
+    <% if(notLoggedIn) { %>
+        <div class="content">
+            <p class="login-signup-text">You are not logged in.</p>
+            <div class="login-signup-div">
+                <a href="/auth/login" class="login-btn">Login</a>
+                <a href="/auth/signup" class="signup-btn">Signup</a>
+            </div>
+        </div>
+    <% } else { %>
+        <%- include("accountNavbar.ejs"); %>
+        <div class="page">
+            <h1 class="info-header">Account Page</h1>
+            <p class="info-text">Welcome! You are a <%= user.role %>!</p>
+        </div>
+    <% } %>
+
+    <%- include("./footer/footer.ejs"); %>
+</body>
+</html>

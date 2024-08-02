@@ -1,0 +1,10 @@
+<div class="admin-navbar">
+    <h2 class="admin-user">Hello, <%= locals.user.name %>!</h2>
+    <div class="admin-text-menu">
+        <a href="/account" class="tm-admin-page">Account Info</a>
+        <a href="/chat" class="tm-admin-page">Chat</a>
+        <% if(locals.user.role == "Helper") { %><a href="/dashboard/profiles?id=<%= locals.userProfile.id %>" class="tm-register-user">Your Profile</a> <% } %>
+        <a href="/account/meetings" class="tm-admin-page">Meetings</a>
+        <a href="/auth/logout" class="tm-logout">Logout</a>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/storyForm.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+   <!-- navbar -->
+  <nav class="navbar">
+    <h2>Hopeful Steps</h2>
+    <div class="text-menu">
+      <a href="/" class="home">Home</a>
+      <a href="/stories" class="stories-link">Stories</a>
+      <a href="/about" class="about-us">About Us</a>
+      <a class="help-link">Help Now</a>
+    </div>
+  </nav>
+  <!-- navbar end -->
+  <!-- navigation -->
+  <div class="section4">
+    <div class="section4-navigation">
+      <a href="#">Top Stories</a>
+      <a href="#" class="nav-most-touching">Most Touching Stories</a>
+      <a href="#" class="nav-recent-stories">Recent Stories</a>
+    </div>
+  </div>
+  <!-- story -->
+  <div class="story">
+    <!-- form -->
+    <form method="POST">
+      <!-- title -->
+      <textarea class="title-input" name="title">Example Title</textarea> 
+
+      <!-- cover image 
+      <div class="cover-image">
+        <div class="upload-image">
+          <input name="coverImage" type="file" id="select-image-button" onchange="handleImageUploading()">
+        </div>
+        <img src="" alt="" id="preview">
+      </div> -->
+
+      <!-- guide -->
+      <div class="guide">
+        <br>
+        <br>
+        <p><b>To add one line space:</b> write &#60;br&#62; &#60;br&#62; after the text you want to add space.</p>
+        <br>
+        <p><b>Bold:</b> surround the text you want to make bold with two asterisks(*)</p>
+        <br>
+        <p><b>Italic:</b> surround the text you want to make italic with one asterisk(*)</p>
+        <br>
+        <p><b>Adding Images:</b> use ![Text](https://hopefulsteps.com/image.jpg) and replace the text inside paranthesis with the source of your image. </p>
+      </div>
+
+      <!-- markup textbox -->
+      <textarea class="content-input" name="content">Content</textarea>
+
+      <!-- description -->
+      <textarea class="description-input" name="description">Description</textarea> 
+
+      <!-- checkbox: top-story -->
+      <label>
+        <input type="checkbox" name="topStory" id="form-checkbox">Top Story
+      </label>
+
+      <button type="submit" class="submit-button">Submit</button>
+      
+    </form>
+  </div>
+
+  <%- include("./footer/footer.ejs"); %>
+
+  <script src="/js/storyForm.js"></script>
+</body>
+</html>

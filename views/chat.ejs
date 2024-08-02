@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- css -->
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+    <%- include("navbar.ejs") %>
+    <input type="hidden" value="<%= url %>" class="url-input">
+    <div class="page">
+        <div class="people">
+          <% contacts.forEach(contact => { %>
+            <% if(locals.user.role == 'Helper') { %>
+              <div class="person">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRigwPUr56Xt4Hdw_zphRE0gnl3N3-mGgCvsQ&usqp=CAU">
+                <a href="/chat?id=<%= contact.id %>"><p><%= contact.customer %></p></a>
+              </div>
+            <% } else if(locals.user.role == 'Customer') { %>
+              <div class="person">
+                <a href="/dashboard/profiles?id=<%= contact.profileId %>"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRigwPUr56Xt4Hdw_zphRE0gnl3N3-mGgCvsQ&usqp=CAU"></a>
+                <a href="/chat?id=<%= contact.chatId %>"><p><%= contact.user %></p></a>
+              </div>
+            <% } %>
+          <% }); %>
+        </div>
+        <div class="chat">
+          <% if(!chat) { %>
+            <p>Click on a person to chat!</p>
+          <% } else if(chat.messages.length != 0) { %>
+            <div id="messages">
+              <% chat.messages.forEach(message => { %>
+                <% if(typeof message.meetingDate !== 'undefined') { %>
+                  <div class="meeting-request-container">
+                    <div class="meeting-request">
+                      <p class="meeting-request-date date"><%= message.meetingDate %></p>
+                      <% if(locals.user.role == "Customer") { %>
+                      <button id="accept-btn" onclick="acceptRequest()">
+                        Accept
+                      </button>
+                      <button id="decline-btn" onclick="declineRequest()">
+                        Decline
+                      </button>
+                      <% } else { %>
+                        <p class="helper-info-txt">You requested a meeting!</p>
+                      <% } %>
+                    </div>
+                  </div>
+                <% } else { %>
+                  <div class="message <% if(locals.user.email == message.author) { %> my-message <% } %>">
+                    <p class="name-time"><%= message.author %> * <%= message.date %></p>
+                    <div class="message-box">
+                      <%= message.content %>
+                    </div>
+                  </div>
+                <% } %>
+              <% }) %> 
+            </div>
+            <div class="message-txtbox">
+              <input type="hidden" class="chat-id" value="<%= chat.id %>">
+              <input type="text" class="message-input">
+              <% if(locals.user.role == 'Helper') { %> 
+                <button class="send-request">Meeting</button> 
+              <% } %>
+              <button type="submit" class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+            <% if(locals.user.role == "Helper") { %>
+              <div class="meeting-request-form hidden">
+                <div class="meeting-request">
+                  <input type="date" name="date" class="date" value="Date">
+                  <input type="number" name="time" class="time" value="" placeholder="Number...">
+                  <select class="timeframe" name="timeframe">
+                    <option value="am">AM</option>
+                    <option value="pm">PM</option>
+                  </select>
+                  <button id="save-changes">Save</button>
+                </div>
+              </div>
+            <% } %>
+          <% } else { %>
+            <p>No Messages.</p>
+            <div class="message-txtbox">
+              <input type="hidden" class="chat-id" value="<%= chat.id %>">
+              <input type="text" class="message-input">
+              <button type="submit" class="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+          <% } %>
+        </div>
+    </div>
+
+    <%- include("./footer/footer.ejs"); %>
+      
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+</html>

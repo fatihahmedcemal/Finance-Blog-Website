@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/storyForm.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+    <!-- navbar -->
+  <nav class="navbar">
+    <h2>Hopeful Steps</h2>
+    <div class="text-menu">
+      <a class="home" href="/">Home</a>
+      <a class="stories-link" href="/stories">Stories</a>
+      <a class="about-us" href="/about">About Us</a>
+      <a class="help-link">Help Now</a>
+    </div>
+  </nav>
+  <!-- navbar end -->
+  <!-- navigation -->
+  <div class="section4">
+    <div class="section4-navigation">
+      <a href="#">Top Stories</a>
+      <a href="#" class="nav-most-touching">Most Touching Stories</a>
+      <a href="#" class="nav-recent-stories">Recent Stories</a>
+    </div>
+  </div>
+  <!-- story -->
+  <div class="story" data-storypage>
+    <!-- title -->
+    <h1 class="story-title"><%= story.title %></h1> 
+
+    <!-- Time -->
+    <p class="story-time"><%= story.createdAt.toLocaleDateString() %></p>
+
+    <!-- markup textbox -->
+    <div class="story-content"><%- story.sanitizedHtml %></div>
+
+    <!-- Author -->
+    <p class="story-author"><%= story.author.username %></p>
+  </div>
+
+  <%- include("./footer/footer.ejs"); %>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.hidden {
+    visibility: hidden;
+}
+/* navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    width: 100%;
+    background-color: #fcff5e /* rgba(255, 255, 255, 0.8) */;
+    /* border-bottom: 1px solid gray; */
+    color: black;
+    padding: 20px;
+    font-size: 35px;
+}
+.navbar h2 {
+    font-family: 'Covered By Your Grace', cursive;
+}
+.text-menu {
+    margin-left: 100px;
+    font-size: 25px;
+    font-family: 'Outfit', sans-serif;
+}
+.text-menu a {
+    margin-right: 15px;
+    cursor: pointer;
+}
+.text-menu a:hover {
+    text-decoration: underline;
+}
+/* navbar end */
+/* navigation start */
+.section4 {
+    font-family: 'Outfit', sans-serif;
+}
+.section4-navigation {
+    background-color: #a8eb34;
+    padding: 25px;
+}
+.section4-navigation a {
+    text-decoration: none;
+    color: black;
+    margin-left: 50px;
+    font-size: 18px;
+}
+.section4-navigation a:hover {
+    border-bottom: 2px solid black;
+}
+/* navigation end */
+/* story start */
+.story {
+    margin-top: 50px;
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    /* border: 1px solid black; */
+    height: 100%;
+    padding: 25px;
+    font-family: 'Open Sans', sans-serif;
+
+    position: relative;
+}
+
+.title-input {
+    width: 100%;
+    padding: 15px 30px;
+
+    display: block;
+    width: 92%;
+    overflow: hidden;
+    min-height: 95px;
+
+    border: 1px solid gray;
+    resize: vertical;
+    font-size: 35px;
+    font-family: 'Open Sans', sans-serif;
+
+    font-style: bold;
+    font-weight: 1000;
+}
+
+.description-input {
+    width: 100%;
+    padding: 7.5px 15px;
+
+    display: block;
+    width: 95.25%;
+    overflow: hidden;
+    min-height: 200px;
+
+    border: 1px solid gray;
+    border-radius: 2.5px;
+    resize: vertical;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+
+    margin-top: 75px;
+
+    text-align: center;
+}
+
+
+/* content */
+.content-input {
+    width: 100%;
+    padding: 15px;
+
+    display: block;
+    width: 95.25%;
+    overflow: hidden;
+    min-height: 300px;
+    height: 400px;
+
+    border: 1px solid gray;
+    border-radius: 2.5px;
+    resize: vertical;
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+
+    margin-top: 50px;
+    margin-bottom: 25px;
+}
+
+/* submit button */
+.submit-button {
+    outline: none;
+    border: 0;
+    padding: 15px 25px;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    margin-top: 50px;
+}
+
+label {
+    display: block;
+}
+
+.form-checkbox {
+    margin-bottom: 25px;
+}
+
+#preview {
+    display: block;
+    width: 80vw;
+    max-width: 740px;
+    margin-left: 0%;
+    height: 50%;
+}
+
+.title-input, .description-input, .content-input {
+    max-width: 700px;
+    padding: 20px;
+}
+
+.cover-image {
+    margin-top: 35px;
+}
+
+/* 
+STORY PAGE STYLING 
+*/
+
+h1, h2, h3, h4, ul {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-left: 40px;
+}
+
+.story-content, .story-title {
+    display: block;
+    width: 100%;
+    padding: 0;
+}
+
+.story-title {
+    font-size: 40px;
+}
+
+img {
+    width: 100%;
+    margin-left: -1%;
+}
+
+[data-storypage] {
+    max-width: 900px;
+}
+
+.story-time {
+    margin-bottom: 25px;
+}

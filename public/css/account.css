@@ -1,0 +1,47 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Not Logged In */
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  
+  .login-signup-text {
+    font-size: 25px;
+    font-family: "Barlow", sans-serif;
+  }
+  
+  .login-signup-div {
+    margin-top: 35px;
+  }
+  
+  .login-btn, .signup-btn {
+    text-decoration: none;
+    background-color: #02a6c7;
+    color: white;
+    font-size: 17px;
+    font-family: 'Barlow', sans-serif;
+    padding: 15px 30px;
+  }
+  
+  .login-btn {
+    margin-right: 10px;
+  }
+  
+  .signup-btn {
+    margin-left: 10px;
+  }
+/* when user is logged in */
+.page {
+  height: 100vh;
+  margin: 20px;
+}
+.page .info-text {
+  margin-top: 15px;
+}

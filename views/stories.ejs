@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stories Page</title>
+    <link rel="stylesheet" href="css/stories.css">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- css -->
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+    <% if(locals.user) { %>
+        <%- include("dashboard.ejs") %>
+    <% } %>
+
+    <nav class="navbar">
+        <h2>Hopeful Steps</h2>
+        <div class="text-menu">
+          <a href="/" class="home">Home</a>
+          <a href="/stories" class="stories-link">Stories</a>
+          <a href="/about" class="about-us">About Us</a>
+          <a class="help-link">Help Now</a>
+        </div>
+      </nav>
+      
+      <div class="section1">
+        <h2 class="top-story">Top Story</h2>
+        <div class="content">
+          <img src="https://images.unsplash.com/photo-1589177900075-9d13b4451617?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzODEzMDI0MA&ixlib=rb-1.2.1&q=85" class="section1-img">
+          <div class="text">
+            <h3 class="section1-title"><a href="/stories/<%= topStories[0].id %>"><%= topStories[0].title %></a></h3>
+            <p class="description"><%= topStories[0].description %></p>
+            <p class="time"><%= topStories[0].createdAt.toLocaleDateString() %></p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="section2">
+        <!-- right and left arrows -->
+        <div class="arrows">
+          <button class="right-arrow">
+            <!-- right arrow -->
+            &#10095;
+          </button>
+          <!-- left arrow -->
+          
+          <button class="left-arrow">
+            &#10094;
+          </button>
+          
+        </div>
+        <!-- part one -->
+        <div class="part1">
+          <!-- News 1 -->
+          <div class="s2-news1">
+            <!-- content div -->
+            <div class="news1-content">
+              <h3 class="news1-title"><a href="/stories/<%= topStories[1].id %>"><%= topStories[1].title %></a></h3>
+              <p class="news1-description"><%= topStories[1].description %></p>
+              <p class="news1-time"><%= topStories[1].createdAt.toLocaleDateString() %></p>
+            </div>
+          </div>
+          
+          <!-- News 2 -->
+          <div class="s2-news2">
+            <!-- content div -->
+            <div class="news2-content">
+              <h3 class="news2-title"><a href="/stories/<%= topStories[1].id %>"><%= topStories[2].title %></a></h3>
+              <p class="news2-description"><%= topStories[2].description %></p>
+              <p class="news2-time"><%= topStories[2].createdAt.toLocaleDateString() %></p>
+            </div>
+          </div>
+          
+          <!-- News 3 -->
+          <div class="s2-news3">
+            <!-- content div -->
+            <div class="news3-content">
+              <h3 class="news3-title"><a href="/stories/<%= topStories[3].id %>"><%= topStories[3].title %></a></h3>
+              <p class="news3-description"><%= topStories[3].description %></p>
+              <p class="news3-time"><%= topStories[3].createdAt.toLocaleDateString() %></p>
+            </div>
+          </div>
+          
+          <!-- News 4 -->
+          <div class="s2-news4">
+            <!-- content div -->
+            <div class="news4-content">
+              <h3 class="news4-title"><a href="/stories/<%= topStories[4].id %>"><%= topStories[4].title %></a></h3>
+              <p class="news4-description"><%= topStories[4].description %></p>
+              <p class="news4-time"><%= topStories[4].createdAt.toLocaleDateString() %></p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- section 3 recent stories -->
+      <div class="section3">
+        <!-- most recent 3 -->
+        <div class="s3-most-recent3">
+          <!-- most recent -->
+          <div class="most-recent">
+            <!-- most recent content div -->
+            <div class="most-recent-content">
+              <h3 class="mr-title"><a href="/stories/<%= recentStories[0].id %>"><%= recentStories[0].title %></a></h3>
+              <p class="mr-description"><%= recentStories[0].description %></p>
+              <p class="mr-time"><%= recentStories[0].createdAt.toLocaleDateString() %></p>
+            </div>
+            
+          </div>
+          
+          <div class="mr2-3-div">
+            <!-- most recent 2 -->
+            <div class="most-recent2">
+              <div class="mr2-content">
+                <h3 class="mr2-title"><a href="/stories/<%= recentStories[1].id %>"><%= recentStories[1].title %></a></h3>
+                <!-- <p class="mr2-description">A sentence for an example Description. This is an example sentence.</p> -->
+                <p class="mr2-time"><%= recentStories[1].createdAt.toLocaleDateString() %></p>
+              </div>
+             </div>
+            <!-- most recent 3 -->
+            <div class="most-recent3">
+              <div class="mr3-content">
+                <h3 class="mr3-title"><a href="/stories/<%= recentStories[2].id %>"><%= recentStories[2].title %></a></h3>
+                <!-- <p class="mr3-description">A sentence for an example Description. This is an example sentence.</p> -->
+                <p class="mr3-time"><%= recentStories[2].createdAt.toLocaleDateString() %></p>
+              </div>
+             </div>
+            
+          </div>
+          
+        </div>
+        <!-- end of most recent 3 stories -->
+        <!-- other recent stories -->
+        <div class="other-recent-stories">
+             <!-- card1 -->
+            <div class="rs-card1">
+              <!-- card 1 content -->
+              <div class="card1-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card1-img">
+                <h2 class="card1-title"><a href="/stories/<%= recentStories[3].id %>"><%= recentStories[3].title %></a></h2>
+                 <p class="card1-description"><%= recentStories[3].description %></p>
+                 <p class="card1-time">
+                  <%= recentStories[3].createdAt.toLocaleDateString() %>
+                  </p>
+              </div>
+            </div>
+            <!-- card2 -->
+            <div class="rs-card2">
+              <!-- card 2 content -->
+              <div class="card2-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card2-img">
+                <h2 class="card2-title"><a href="/stories/<%= recentStories[4].id %>"><%= recentStories[4].title %></a></h2>
+                  <p class="card2-description"><%= recentStories[4].description %></p>
+                  <p class="card2-time">
+                    <%= recentStories[4].createdAt.toLocaleDateString() %>
+                  </p>
+              </div>
+            </div>
+            <!-- card3 -->
+            <div class="rs-card3">
+              <!-- card 3 content -->
+              <div class="card3-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card3-img">
+                <h2 class="card3-title"><a href="/stories/<%= recentStories[5].id %>"><%= recentStories[5].title %></a></h2>
+                  <p class="card3-description"><%= recentStories[5].description %></p>
+                  <p class="card3-time">
+                    <%= recentStories[5].createdAt.toLocaleDateString() %>
+                  </p>
+              </div>
+            </div>
+            <!-- card4 -->
+            <div class="rs-card4">
+              <!-- card 4 content -->
+              <div class="card4-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card4-img">
+                <h2 class="card4-title"><a href="/stories/<%= recentStories[6].id %>"><%= recentStories[6].title %></a></h2>
+                 <p class="card4-description"><%= recentStories[6].description %></p>
+                 <p class="card4-time">
+                  <%= recentStories[6].createdAt.toLocaleDateString() %>
+                  </p>
+              </div>
+            </div>
+            <!-- card5 -->
+            <div class="rs-card5">
+              <!-- card 5 content -->
+              <div class="card5-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card5-img">
+                <h2 class="card5-title"><a href="/stories/<%= recentStories[7].id %>"><%= recentStories[7].title %></a></h2>
+                <p class="card5-description"><%= recentStories[7].description %></p>
+                <p class="card5-time">
+                  <%= recentStories[7].createdAt.toLocaleDateString() %>
+                </p>
+              </div>
+            </div>
+            <!-- card6 -->
+            <div class="rs-card6">
+              <!-- card 6 content -->
+              <div class="card6-content">
+                <img src="https://images.unsplash.com/photo-1495602787267-96ab76127c2a?crop=entropy&cs=srgb&fm=jpg&ixid=MnwxNDU4OXwwfDF8cmFuZG9tfHx8fHx8fHx8MTYzOTI3NDAxNg&ixlib=rb-1.2.1&q=85" class="card6-img">
+                <h2 class="card6-title"><a href="/stories/<%= recentStories[8].id %>"><%= recentStories[8].title %></a></h2>
+                  <p class="card6-description"><%= recentStories[8].description %></p>
+                  <p class="card6-time">
+                    <%= recentStories[8].createdAt.toLocaleDateString() %>
+                  </p>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <div class="section4">
+        <h1 class="see-more">
+          SEE MORE...
+        </h1>
+        <div class="section4-navigation">
+          <a href="#">Top Stories</a>
+          <a href="#" class="nav-most-touching">Most Touching Stories</a>
+          <a href="#" class="nav-recent-stories">Recent Stories</a>
+        </div>
+      </div>
+
+      <%- include("./footer/footer.ejs"); %>
+
+      <script src="js/stories.js"></script>
+</body>
+</html>

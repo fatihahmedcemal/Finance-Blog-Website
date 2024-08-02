@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.admin-navbar {
+    background-color: #d3f5dc;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+    margin-top: 0px;
+
+    font-family: 'Barlow', sans-serif;
+}
+.admin-user {
+    margin-right: 25px;
+}
+.admin-text-menu {
+    margin-left: 25px;
+}
+.admin-text-menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+}
+.tm-admin-page {
+    margin-right: 15px;
+}
+.tm-register-user {
+    margin-right: 15px;
+}
+.admin-text-menu a:hover {
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User's profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- css -->
+    <base href="/">
+    <link rel="stylesheet" href="css/profilePage.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/footer/footer.css">
+</head>
+<body>
+    <%- include("navbar.ejs"); %>
+
+    <% if(profileOfThisUser) { %>
+        <div class="user-profile">
+            <form action="/dashboard/profiles?id=<%= userProfile.id %>" method="POST">
+                <div class="basic-info">
+                    <div class="profile-pic">
+                        <img src="https://i.pinimg.com/736x/7e/a5/62/7ea562c1e364f850ec042461dbc5b0e8--hobby-tucson.jpg" />
+                    </div>
+                    <div class="text-info">
+                        <p class="name-email-text"><b><%= user.name %> </b> - <%= user.email %></p>
+                        <textarea class="description-textarea" name="description"><%= user.description %></textarea>
+                        <h2 class="extra-info-text">
+                        Other Information
+                        </h2>
+                        <div class="other-info-div">
+                            <div>
+                                <p class="occupation"><b>Occupation:</b><input type="text" name="occupation" value="<%= user.occupation %>"></p>
+                                <p class="occupation"><b>Sub Category: </b>
+                                    <p><%= user.subCategory %></p>
+                                    <select name="subCategory" id="subCategory-dropdown"> <!-- NOTE: Dropdown with search to make selecting a category easier-->
+                                        <% subCategories.forEach(subCategory => { %>
+                                            <option value="<%= subCategory.name %>"><%= subCategory.name %></option>
+                                        <% }); %>
+                                    </select>
+                                </p>
+                            </div>
+                            <div class="resume">
+                                <p class="resume-text">
+                                <b>Resume:</b>
+                                </p>
+                                <textarea class="resume-textarea" name="resume"><%= user.resume %></textarea>
+                            </div>
+                        </div>
+                        <button class="submit-btn" type="Submit">Update Profile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    <% } else { %>
+        <div class="user-profile">
+            <div class="basic-info">
+                <div class="profile-pic">
+                    <img src="https://i.pinimg.com/736x/7e/a5/62/7ea562c1e364f850ec042461dbc5b0e8--hobby-tucson.jpg" />
+                </div>
+                <div class="text-info">
+                    <p class="name-email-text"><b><%= userProfile.name %> </b> - <%= userProfile.email %></p>
+                    <p class="description"><%= userProfile.description %></p>
+                    <h2 class="extra-info-text">
+                    Other Information
+                    </h2>
+                    <div class="other-info-div">
+                        <div>
+                            <p class="occupation"><b>Occupation: </b><%= userProfile.occupation %></p>
+                            <p class="occupation"><b>Sub Category: </b><%= userProfile.subCategory %></p>
+                        </div>
+                        <div class="resume">
+                            <p class="resume-text">
+                            <b>Resume:</b>
+                            <p><%= userProfile.resume %></p>
+                            </p>
+                        </div>
+                    </div>
+                    <% if(locals.user.role == 'Customer') { %> <a href="/chat/add?id=<%= userProfile.id %>">Chat</a> <% } %>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <%- include("./footer/footer.ejs"); %>
+</body>
+</html>
