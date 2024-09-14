@@ -1,4 +1,4 @@
-Full-stack shared economy website built using node.js, html (ejs), css, and javascript. Additionally, socket.io was used 
+Full-stack shared economy website built using node.js for backend, html (ejs), css, and javascript. Additionally, socket.io was used 
 for the chat system and mongoDB for data storage.   
 
 # About Help-Bridge:  
