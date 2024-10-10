@@ -4,30 +4,52 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-
-    <link rel="stylesheet" href="css/adminNavbar.css">
-    <link rel="stylesheet" href="css/admin.css">
-    <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/footer/footer.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@200;300;400&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/navbar.css">
 </head>
 <body>
-    <% if(locals.user) { %>
-        <%- include("navbar.ejs"); %>
-        <%- include("adminNavbar.ejs"); %>
-    <% } %>
-    <div class="admin-page-content">
-        <p>Admin Page</p>
-    </div>
 
-    <%- include("./footer/footer.ejs"); %>
+    <%- include("navbar.ejs") %>
+
+    <div class="admin-page">
+        <a href="/stories/new" class="create-article-btn">Create An Article</a>
+        <div class="article-page">
+          <h2 class="article-page-header">
+          Article Page
+        </h2>
+          <div class="mini-page">
+            <div class="mini-articles">
+              <div class="section1">
+                <% recentStories.forEach(story => { %>
+                  <div class="box1">
+                    <h2><%= story.title %></h2>
+                    <p><%= story.articleOrder %></p>
+                    <!-- <a href="/stories/<%= story.id %>/edit">Edit</a> -->
+                  </div>
+                  
+                <% }) %>
+              </div>
+              <div class="section2">
+                <% topStories.forEach(story => { %>
+                  <div class="box2">
+                    <h2><%= story.title %></h2>
+                    <form action="" method="post">
+                      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                      <div>
+                        <textarea name="articleOrder"><%= story.articleOrder %></textarea>
+                        <input type="text" name="id" class="storyId" value="<%= story.id %>">
+                      </div>
+                      <button type="submit">Update</button>
+                    </form>
+                    <!-- <a href="/stories/<%= story.id %>/edit">Edit</a> -->
+                  </div>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

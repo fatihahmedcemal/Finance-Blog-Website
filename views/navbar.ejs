@@ -1,24 +1,9 @@
-<nav class="navigation-bar">
-    <!-- logo -->
-    <div class="logo-div">
-        <img src="https://png.pngitem.com/pimgs/s/73-732178_calendar-icon-hd-png-download.png" class="logo-img">
-        <h1 class="logo-h1">Logo</h1>
-    </div>
-    <!-- text menu -->
-    <div class="text-menu">
-        <div class="menu-section1">
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-        </div>
-        <div class="menu-section2">
-            <a href="/account">Account</a>
-            <a href="/help">Help</a>
-        </div>
-    </div>
-    <!-- hamburger menu -->
-    <div class="hamburger-menu">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-    </div>
-</nav>
+<nav class="navbar">
+    <div class="logo"><a href="/">Finance Daily</a></div>
+    <% if (locals.user) { %>
+      <div class="text-menu">
+        <a href="/admin">Admin Page</a>
+        <a href="/admin/logout">Logout</a>
+      </div> 
+    <% } %>
+  </nav>

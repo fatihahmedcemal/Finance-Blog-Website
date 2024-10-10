@@ -1,20 +1,46 @@
 const express = require("express");
 const app = express();
 const mainRoute = require("./routes/index");
-const mongoose = require("mongoose");
 
-const User = require("./schemas/userSchema");
-const Helper = require("./schemas/helperProfile");
+const adminUser = require("./schemas/adminUser");
+
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
+const helmet = require("helmet");
+app.use(helmet({ contentSecurityPolicy: false }));
+
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 15*60*1000, // 15 minutes
+  max: 100, // limit of number of requests per ip
+  delayMs: 0 // disables delays
+});
 
 // public 
 app.use(express.static('public'));
 app.use('/css', express.static(__dirname + 'public/css'));
 app.use('/js', express.static(__dirname + 'public/js'));
+app.use('/images', express.static(__dirname + 'public/images'));
 
 const { uri, keys_list } = require("./secret")
 
 // mongodb 
-mongoose.connect(uri);
+const mongoose = require('mongoose');
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+async function runMongoDB() {
+  try {
+    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+    await mongoose.connect(uri, clientOptions);
+    await mongoose.connection.db.admin().command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } catch(err) {
+    console.log("errrr")
+    console.log(err)
+  } 
+}
+
+runMongoDB()
 
 const ejs = require("ejs");
 
@@ -29,57 +55,30 @@ app.use(
       resave: false,
       saveUninitialized: true,
       sameSite: 'lax',
-      maxAge: null,
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
     })
 );
 
 app.use(async (req, res, next) => {
     console.log(req.session.userId);
     if (!req.session.userId) return next();
-    const user = await User.findById(req.session.userId);
+    const user = await adminUser.findById(req.session.userId);
     if (!user) {
       req.session.userId = null;
       return next();
     }
-    if(user.role == "Helper") {
-      const userProfile = await Helper.findOne({ email: user.email });
-      if(userProfile) {
-        req.userProfile = userProfile;
-        res.locals.userProfile = userProfile;
-        req.user = user;
-        res.locals.user = user;
-        return next();
-      } else {
-        req.userProfile = null;
-        res.locals.userProfile = null;
-        return next();
-      } 
-    } else {
-      req.user = user;
-      res.locals.user = user;
-      return next();
-    }
+    req.user = user;
+    res.locals.user = user;
+    req.user.name = user.username;
+    return next();
 });
 
 app.set("view engine", "ejs");
 
-app.use(express.urlencoded({ extended: false}));
-
-const http = require("http");
-const socketio = require("socket.io");
-const server = http.createServer(app);
-const io = socketio(server);
-
-const chatSystem = require("./routes/chatSystem");
-
-chatSystem(io);
-
-const port = 80;
+const port = 3000;
 
 app.use("/", mainRoute);
 
-server.listen(port, () => {
-    console.log(`The app is running on port ${port}!`);
+app.listen(port, () => {
+  console.log(`The app is running on port ${port}!`);
 });
-
-module.exports = server;

@@ -2,73 +2,30 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 
-const authRoute = require("./auth");
 const adminRoute = require("./admin");
-const dashboardRoute = require("./dashboard.js");
-const chatRoute = require("./chat.js");
-const meetingRoute = require("./meeting.js");
+const storyRoute = require("./story");
 
+const Story = require("../schemas/storySchema");
 
-const User = require("../schemas/userSchema");
-const Chat = require("../schemas/chatSchema");
-
-router.get("/", (req, res) => {
-    res.render("home.ejs");
+router.get("/", async (req, res) => {
+    console.log("1")
+    const recentStories = await Story.find().sort({ createdAt: -1 });
+    const topStories = await Story.find({ topStory: "on"}).sort({ articleOrder: 1});
+    res.render("financeArticles.ejs", { recentStories, topStories });
 });
 
-// Account and Help
-router.get("/account", async (req, res) => {
-    console.log(req.user);
-    if(!req.user) return res.render("account.ejs", { notLoggedIn: true })
-    if(req.user.role == "Admin") return res.redirect("/admin");
-
-    const userProfile = await User.findOne({ email: req.user.email });
-
-    res.render("account.ejs", { user: userProfile, notLoggedIn: false })
-});
-
-// meetings page 
-router.get("/account/meetings", async (req, res) => {
-    var meetings = [];
-    var chatsOfUser;
-    // find user chats
-    if(req.user.role == 'Helper') {
-        chatsOfUser = await Chat.find({ helper: req.user.name });
-    } else if(req.user.role == 'Customer') {
-        chatsOfUser = await Chat.find({ customer: req.user.name });
-    }
-    // check if the user doesn't have any chats
-    if(chatsOfUser.length === 0) return res.render("meetings.ejs", { meetings });
-    // add the meetings in every chat to the 'meetings' array
-    chatsOfUser.forEach(chat => {
-        if(chat.meetings) {
-            const meetingsOfChat = chat.meetings;
-            meetingsOfChat.forEach(meeting => {
-                meetings.push(meeting);
-            });
-        }
-    });
-    // render the page with the meetings the user has scheduled
-    res.render("meetings.ejs", { meetings });
-});
-
-router.get("/help", (req, res) => {
-    res.render("help.ejs");
-});
-
-// auth
-router.use("/auth", authRoute);
+router.get("/about", (req, res) => {
+    res.render("about.ejs")
+})
 
 // admin
-router.use("/admin", adminRoute);
+router.use("/admin", adminRoute)
 
-// discover
-router.use("/dashboard", dashboardRoute);
+// story
+router.use("/stories", storyRoute);
 
-// chat
-router.use("/chat", chatRoute);
-
-// meeting
-router.use("/meeting", meetingRoute);
+router.use((req, res, next) => {
+    res.redirect("/");
+});
 
 module.exports = router;

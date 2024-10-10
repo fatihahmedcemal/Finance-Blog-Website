@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src https://unpkg.com/ 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src data: * blob: ;script-src 'self';worker-src blob: ;script-src-elem https://unpkg.com 'self';script-src-attr 'none';style-src https://unpkg.com/ 'self' https: 'unsafe-inline';upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -19,43 +19,45 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/storyForm.css">
-    <link rel="stylesheet" href="css/footer/footer.css">
+    <!-- FilePond -->
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" crossorigin>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js" crossorigin></script>
+    <script src="https://unpkg.com/filepond/dist/filepond.js" crossorigin></script>
+    
+    <script defer src="/js/Story.js"></script>
 </head>
 <body>
-   <!-- navbar -->
-  <nav class="navbar">
-    <h2>Hopeful Steps</h2>
-    <div class="text-menu">
-      <a href="/" class="home">Home</a>
-      <a href="/stories" class="stories-link">Stories</a>
-      <a href="/about" class="about-us">About Us</a>
-      <a class="help-link">Help Now</a>
-    </div>
-  </nav>
-  <!-- navbar end -->
-  <!-- navigation -->
-  <div class="section4">
-    <div class="section4-navigation">
-      <a href="#">Top Stories</a>
-      <a href="#" class="nav-most-touching">Most Touching Stories</a>
-      <a href="#" class="nav-recent-stories">Recent Stories</a>
-    </div>
-  </div>
+
+  <%- include("navbar.ejs") %>
+
   <!-- story -->
   <div class="story">
     <!-- form -->
-    <form method="POST">
+    <form method="POST" action="">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <!-- title -->
       <textarea class="title-input" name="title">Example Title</textarea> 
 
-      <!-- cover image 
-      <div class="cover-image">
-        <div class="upload-image">
-          <input name="coverImage" type="file" id="select-image-button" onchange="handleImageUploading()">
-        </div>
-        <img src="" alt="" id="preview">
-      </div> -->
+      <!-- Cover Image -->
+      <h3 class="cover-image-txt">Cover Image: Please Type Full Url</h3>
+
+
+      <!-- <input type="image" src="" alt="" class="cover-image"> -->
+
+      <!-- <input type="url" name="coverImage" id="cover-image"> -->
+      <input type="file" class="filepond" id="cover-image" name="coverImage">
 
       <!-- guide -->
       <div class="guide">
@@ -81,13 +83,11 @@
         <input type="checkbox" name="topStory" id="form-checkbox">Top Story
       </label>
 
+      <!-- Attachments -->
+      <input type="file" class="filepond" id="attachments" name="attachments">
+
       <button type="submit" class="submit-button">Submit</button>
       
     </form>
-  </div>
-
-  <%- include("./footer/footer.ejs"); %>
-
-  <script src="/js/storyForm.js"></script>
 </body>
 </html>

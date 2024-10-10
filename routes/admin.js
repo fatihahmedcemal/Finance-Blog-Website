@@ -1,57 +1,86 @@
 const express = require("express");
 const router = express.Router();
 
-const User = require("../schemas/userSchema");
-const Category = require("../schemas/categorySchema");
-const SubCategory = require("../schemas/subCategory.js");
+const adminUser = require("../schemas/adminUser");
+const Story = require("../schemas/storySchema");
+const bcrypt = require("bcrypt");
 
-function checkUser(req, res, next) {
-    if(req.user && req.user.role == "Admin") {
-        next()
-    } else {
+const checkUser = require("./checkUser");
+
+const csurf = require('csurf');
+router.use(csurf());
+
+router.get("/", checkUser, async (req, res) => {
+    const recentStories = await Story.find().sort({ createdAt: -1 });
+    const topStories = await Story.find({ topStory: "on"}).sort({ articleOrder: 1});
+    res.render("admin.ejs", { recentStories, topStories, csrfToken: req.csrfToken() });
+});
+
+router.post("/", checkUser, async (req, res) => {
+    const story = await Story.findByIdAndUpdate(req.body.id, {articleOrder: req.body.articleOrder});
+    res.redirect("/admin")
+});
+
+router.get("/login", (req, res) => {
+    if(!req.user) return res.render("login.ejs", { csrfToken: req.csrfToken() });
+    res.redirect("/");
+});
+
+router.post("/login", async (req, res) => {
+    try {
+        const user = await adminUser.findOne({ email: req.body.email });
+        console.log(user);
+        if (!user) {
+            return res.status(400).send("Wrong email or password.");
+        }
+
+        const comparePassword = await bcrypt.compare(req.body.password, user.password); 
+        console.log(comparePassword);
+        if (!comparePassword) {
+            res.status(400).send("Wrong email or password");
+        }
+        req.session.userId = user.id;
         res.redirect("/");
-    }
-}
-
-router.get("/", checkUser, (req, res) => {
-    console.log(req.user);
-    res.render("admin.ejs");
-});
-
-router.get("/new/sub-category", checkUser, async (req, res) => {
-    const categories = await Category.find();
-    res.render("form.ejs", { form: "Sub Category", categories });
-});
-
-router.post("/new/sub-category", checkUser, async (req, res) => {
-    var subcategory = new SubCategory({
-        category: req.body.category.toLowerCase(),
-        name: req.body.name.toUpperCase()
-    }); 
-    try {
-        subcategory = await subcategory.save();
-        res.redirect("/dashboard");
-        console.log(subcategory);
     } catch (error) {
-        return res.status(400).send(error);
+        console.log(error);
+        res.redirect("/admin");
     }
 });
 
-router.get("/new/category", checkUser, (req, res) => {
-    res.render("form.ejs", { form: "Category" });
+// add a method to check the user
+router.get("/signup", (req, res) => {
+    res.render("signup.ejs", { csrfToken: req.csrfToken() });
 });
 
-router.post("/new/category", checkUser, async (req, res) => {
-    var category = new Category({
-        name: req.body.name
+router.post("/signup", async (req, res) => {
+    console.log("-2")
+    const password = await bcrypt.hash(req.body.password, 10)
+    console.log("-1")
+    var user = new adminUser({
+        username: req.body.username,
+        email: req.body.email,
+        password: password
     }); 
+    console.log("0")
     try {
-        category = await category.save();
-        res.redirect("/dashboard");
-        console.log(category);
+        console.log("1")
+        user = await user.save();
+        console.log("2")
+        req.session.userId = user.id;
+        console.log("3");
+        res.redirect("/");
+        console.log("4");
+        console.log("4.5", user);
     } catch (error) {
-        return res.status(400).send(error);
+        console.log("5")
+        return res.status(400).send("There was an error!");
     }
 });
+
+router.get("/logout", checkUser, (req, res) => {
+    req.session.userId = null;
+    return res.redirect("/")
+});
+
 
 module.exports = router;
